@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f24/team01-f24-02
 owner: ucsb-cs156-f24
 repo_name: team01-f24-02
-pull_requests: []
+pull_requests: [{"author":{"id":"U_kgDOB2W7yQ","is_bot":false,"login":"berdly","name":"Jakob Pinedo"},"headRefName":"berdly","number":43,"title":"fixes #20 creating a RecommendationRequest","url":"https://github.com/ucsb-cs156-f24/team01-f24-02/pull/43"}]
