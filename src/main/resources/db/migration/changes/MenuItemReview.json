@@ -1,0 +1,75 @@
+{
+    "databaseChangeLog": [
+      {
+        "changeSet": {
+          "id": "MenuItemReview-1",
+          "author": "VedP",
+          "preConditions": [
+            {
+              "onFail": "MARK_RAN"
+            },
+            {
+              "not": [
+                {
+                  "tableExists": {
+                    "tableName": "menuitemreviews"
+                  }
+                }
+              ]
+            }
+          ],
+          "changes": [
+            {
+              "createTable": {
+                "columns": [
+                  {
+                    "column": {
+                      "autoIncrement": true,
+                      "constraints": {
+                        "primaryKey": true,
+                        "primaryKeyName": "PKNMENUITEMREVIEWS"
+                      },
+                      "name": "id",
+                      "type": "BIGINT"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "dateReviewed",
+                      "type": "TIMESTAMP"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "comments",
+                      "type": "VARCHAR(255)"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "reviewerEmail",
+                      "type": "VARCHAR(255)"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "stars",
+                      "type": "INT"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "itemId",
+                      "type": "BIGINT"
+                    }
+                  }
+                ],
+                "tableName": "menuitemreviews"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+  
