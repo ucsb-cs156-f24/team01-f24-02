@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 public class HelpRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String requesterEmail;
     private String teamId;
     private String tableOrBreakoutRoom;
