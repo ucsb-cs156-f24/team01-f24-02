@@ -4,6 +4,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import edu.ucsb.cs156.example.entities.Articles;
 
+/**
+ * The articlesRepository is a repository for article entities
+ */
 @Repository
-public interface ArticlesRepository extends CrudRepository<Articles, Long> {
+public interface articlesRepository extends CrudRepository<Articles, Long> {
 }

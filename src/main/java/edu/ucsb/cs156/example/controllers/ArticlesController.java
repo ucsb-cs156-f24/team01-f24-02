@@ -36,13 +36,13 @@ import java.time.LocalDateTime;
 @Slf4j
 public class ArticlesController extends ApiController {
     @Autowired
-    ArticlesController articlesController;
+    articlesRepository articlesRepository;
 
     @Operation(summary= "List all Articles")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
     public Iterable<Articles> allArticles() {
-        Iterable<Articles> articles = ArticlesRepository.findAll();
+        Iterable<Articles> articles = articlesRepository.findAll();
         return articles;
     }
 
@@ -71,50 +71,57 @@ public class ArticlesController extends ApiController {
         Articles articles = Articles.builder()
             .title(title)
             .url(url)
-            .explanation(email)
+            .explanation(explaination)
+            .email(email)
             .dateAdded(localDateTime)
             .build();
 
-        Articles savedArticles = ArticlesRepository.save(articles);
+        Articles savedArticles = articlesRepository.save(articles);
 
         return savedArticles;
     }
     /**
      * Get a single article by id
      * 
-     * @param id the id of the date
+     * @param id the id of the article
      * @return an article
      */
-    @Operation(summary= "Get a single date")
+    @Operation(summary= "Get a single article")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("")
     public Articles getById(
     @Parameter(name="id") @RequestParam Long id) {
-            Articles article = ArticlesRepository.findById(id)
+            Articles article = articlesRepository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
        
             return article;
     
     }
     
+    /**
+     * update a single article, accessible by only admins
+     * @param id
+     * @param incoming
+     * @return
+     */
     @Operation(summary= "Update a single article")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
-    public Articles updateaArticles(
+    public Articles updateArticles(
             @Parameter(name="id") @RequestParam Long id,
             @RequestBody @Valid Articles incoming) {
 
-        Articles articles = articles.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(articles.class, id));
+        Articles articles = articlesRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
 
         articles.setTitle(incoming.getTitle());
         articles.setUrl (incoming.getUrl());
         articles.setExplanation(incoming.getExplanation());
         articles.setEmail(incoming.getEmail());
-        articles.setDateAdded(incoming.getDateadded());
+        articles.setDateAdded(incoming.getDateAdded());
         
 
-        ArticlesRepository.save(articles);
+        articlesRepository.save(articles);
 
         return articles;
     }
@@ -130,10 +137,10 @@ public class ArticlesController extends ApiController {
     @DeleteMapping("")
     public Object deleteArticle(
             @Parameter(name="id") @RequestParam Long id) {
-        Articles article = ArticlesRepository.findById(id)
+        Articles article = articlesRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
 
-        ArticlesRepository.delete(article);
+        articlesRepository.delete(article);
         return genericMessage("Article with id %s deleted".formatted(id));
     }
 
