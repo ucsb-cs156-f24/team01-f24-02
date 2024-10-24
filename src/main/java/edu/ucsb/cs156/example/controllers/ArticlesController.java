@@ -1,17 +1,15 @@
 package edu.ucsb.cs156.example.controllers;
 
-import edu.ucsb.cs156.example.entities.Articles;
-import edu.ucsb.cs156.example.entities.UCSBDiningCommons;
+import edu.ucsb.cs156.example.entities.*;
 import edu.ucsb.cs156.example.errors.EntityNotFoundException;
-import edu.ucsb.cs156.example.repositories.ArticlesRepository;
-import edu.ucsb.cs156.example.repositories.UCSBDiningCommonsRepository;
+import edu.ucsb.cs156.example.repositories.*;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import jakarta.validation.Valid;
+
+import java.time.LocalDateTime;
 /**
  * This is a REST controller for Articles
  */
@@ -70,19 +68,73 @@ public class ArticlesController extends ApiController {
             throws JsonProcessingException {
         log.info("localDateTime={}", localDateTime);
 
-        Articles articles = new Articles();
-        articles.setTitle(title);
-        articles.setUrl(url);
-        articles.setexplaination(explaination);
-        articles.setEmail(email);
-        articles.setLocalDateTime(localDateTime);
+        Articles articles = Articles.builder()
+            .title(title)
+            .url(url)
+            .explanation(email)
+            .dateAdded(localDateTime)
+            .build();
 
         Articles savedArticles = ArticlesRepository.save(articles);
 
         return savedArticles;
     }
+    /**
+     * Get a single article by id
+     * 
+     * @param id the id of the date
+     * @return an article
+     */
+    @Operation(summary= "Get a single date")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("")
+    public Articles getById(
+    @Parameter(name="id") @RequestParam Long id) {
+            Articles article = ArticlesRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
+       
+            return article;
+    
+    }
+    
+    @Operation(summary= "Update a single article")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("")
+    public Articles updateaArticles(
+            @Parameter(name="id") @RequestParam Long id,
+            @RequestBody @Valid Articles incoming) {
 
+        Articles articles = articles.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(articles.class, id));
 
+        articles.setTitle(incoming.getTitle());
+        articles.setUrl (incoming.getUrl());
+        articles.setExplanation(incoming.getExplanation());
+        articles.setEmail(incoming.getEmail());
+        articles.setDateAdded(incoming.getDateadded());
+        
 
+        ArticlesRepository.save(articles);
+
+        return articles;
+    }
+
+    /**
+     * Delete an article
+     * 
+     * @param id the id of thearticle to delete
+     * @return a message indicating the article was deleted
+     */
+    @Operation(summary= "Delete an article")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("")
+    public Object deleteArticle(
+            @Parameter(name="id") @RequestParam Long id) {
+        Articles article = ArticlesRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
+
+        ArticlesRepository.delete(article);
+        return genericMessage("Article with id %s deleted".formatted(id));
+    }
 
 }

@@ -7,10 +7,12 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Data;
 import java.time.LocalDateTime;
 
 
 @Builder
+@Data
 @Entity(name = "articles")
 @AllArgsConstructor
 @NoArgsConstructor
