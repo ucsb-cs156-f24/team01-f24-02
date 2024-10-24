@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class MenuItemReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private Long itemId;
     private String reviewerEmail;
