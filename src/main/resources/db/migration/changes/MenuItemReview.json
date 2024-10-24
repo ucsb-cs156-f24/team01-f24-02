@@ -12,7 +12,7 @@
               "not": [
                 {
                   "tableExists": {
-                    "tableName": "menuitemreviews"
+                    "tableName": "MENUITEMREVIEW"
                   }
                 }
               ]
@@ -27,44 +27,44 @@
                       "autoIncrement": true,
                       "constraints": {
                         "primaryKey": true,
-                        "primaryKeyName": "PKNMENUITEMREVIEWS"
+                        "primaryKeyName": "MENUITEMREVIEW_PK"
                       },
-                      "name": "id",
+                      "name": "ID",
                       "type": "BIGINT"
                     }
                   },
                   {
                     "column": {
-                      "name": "dateReviewed",
+                      "name": "DATEREVIEWED",
                       "type": "TIMESTAMP"
                     }
                   },
                   {
                     "column": {
-                      "name": "comments",
+                      "name": "COMMENTS",
                       "type": "VARCHAR(255)"
                     }
                   },
                   {
                     "column": {
-                      "name": "reviewerEmail",
+                      "name": "REVIEWEREMAIL",
                       "type": "VARCHAR(255)"
                     }
                   },
                   {
                     "column": {
-                      "name": "stars",
+                      "name": "STARS",
                       "type": "INT"
                     }
                   },
                   {
                     "column": {
-                      "name": "itemId",
+                      "name": "ITEMID",
                       "type": "BIGINT"
                     }
                   }
                 ],
-                "tableName": "menuitemreviews"
+                "tableName": "MENUITEMREVIEW"
               }
             }
           ]
