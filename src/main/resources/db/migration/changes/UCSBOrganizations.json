@@ -27,7 +27,7 @@
                         "primaryKey": true,
                         "primaryKeyName": "UCSBORGANIZATIONS_PK"
                       },
-                      "name": "ORGCODE",
+                      "name": "ORG_CODE",
                       "type": "VARCHAR(255)"
                     }
                   },
@@ -36,7 +36,7 @@
                       "constraints": {
                         "nullable": false
                       },
-                      "name": "ORGTRANSLATIONSHORT",
+                      "name": "ORG_TRANSLATION_SHORT",
                       "type": "VARCHAR(255)"
                     }
                   },
@@ -45,7 +45,7 @@
                       "constraints": {
                         "nullable": false
                       },
-                      "name": "ORGTRANSLATION",
+                      "name": "ORG_TRANSLATION",
                       "type": "VARCHAR(255)"
                     }
                   },

@@ -43,7 +43,7 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
     @Test
     public void logged_out_users_cannot_get_all() throws Exception {
         mockMvc.perform(get("/api/ucsborganizations/all"))
-                        .andExpect(status().is(200)); // logged out users can't get all
+                        .andExpect(status().is(403)); // logged out users can't get all
     }
 
     @WithMockUser(roles = { "USER" })

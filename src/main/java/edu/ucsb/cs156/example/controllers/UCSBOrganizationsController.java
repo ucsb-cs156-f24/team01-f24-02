@@ -33,12 +33,16 @@ public class UCSBOrganizationsController extends ApiController {
     @Autowired
     UCSBOrganizationsRepository ucsbOrganizationsRepository;
 
+    @Operation(summary= "List all ucsb organizations")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
     public Iterable<UCSBOrganizations> allOrganizations() {
         Iterable<UCSBOrganizations> organization = ucsbOrganizationsRepository.findAll();
         return organization;
     }
     
+    @Operation(summary= "Create a new organization")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
     public UCSBOrganizations postOrganization(
         @Parameter(name="orgCode") @RequestParam String orgCode,
