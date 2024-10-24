@@ -19,9 +19,9 @@ import java.time.LocalDateTime;
 public class MenuItemReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    private Long itemId;
+    private long itemId;
     private String reviewerEmail;
     private int stars;
     private LocalDateTime dateReviewed;
