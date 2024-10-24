@@ -35,7 +35,7 @@
                   },
                   {
                     "column": {
-                      "name": "DATEREVIEWED",
+                      "name": "DATE_REVIEWED",
                       "type": "TIMESTAMP"
                     }
                   },
@@ -47,7 +47,7 @@
                   },
                   {
                     "column": {
-                      "name": "REVIEWEREMAIL",
+                      "name": "REVIEWER_EMAIL",
                       "type": "VARCHAR(255)"
                     }
                   },
@@ -59,7 +59,7 @@
                   },
                   {
                     "column": {
-                      "name": "ITEMID",
+                      "name": "ITEM_ID",
                       "type": "BIGINT"
                     }
                   }
