@@ -51,6 +51,23 @@ public class UCSBDiningCommonsMenuItemsController extends ApiController {
     }
 
     /**
+     * Get a single DiningCommonsMenuItems by id
+     * 
+     * @param id the id of the DiningCommonsMenuItems
+     * @return a UCSBDiningCommonsMenuItems
+     */
+    @Operation(summary= "Get a single DiningCommonsMenuItems")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("")
+    public UCSBDiningCommonsMenuItems getById(
+            @Parameter(name="id") @RequestParam Long id) {
+        UCSBDiningCommonsMenuItems ucsbDiningCommonsMenuItems = ucsbDiningCommonsMenuItemsRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommonsMenuItems.class, id));
+
+        return ucsbDiningCommonsMenuItems;
+    }
+
+    /**
      * Create a new DiningCommonsMenuItems
      * 
      * @param diningCommonsCode     the dining common code 
@@ -75,5 +92,31 @@ public class UCSBDiningCommonsMenuItemsController extends ApiController {
         UCSBDiningCommonsMenuItems savedUcsbDiningCommonsMenuItems = ucsbDiningCommonsMenuItemsRepository.save(ucsbDiningCommonsMenuItems);
 
         return savedUcsbDiningCommonsMenuItems;
+    }
+
+    /**
+     * Update a single DiningCommonsMenuItems
+     * 
+     * @param id       id of the DiningCommonsMenuItems to update
+     * @param incoming the new DiningCommonsMenuItems
+     * @return the updated DiningCommonsMenuItems object
+     */
+    @Operation(summary= "Update a single DiningCommonsMenuItems")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("")
+    public UCSBDiningCommonsMenuItems updateUCSBDiningCommonsMenuItems(
+            @Parameter(name="id") @RequestParam Long id,
+            @RequestBody @Valid UCSBDiningCommonsMenuItems incoming) {
+
+        UCSBDiningCommonsMenuItems ucsbDiningCommonsMenuItems = ucsbDiningCommonsMenuItemsRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommonsMenuItems.class, id));
+
+        ucsbDiningCommonsMenuItems.setDiningCommonsCode(incoming.getDiningCommonsCode());
+        ucsbDiningCommonsMenuItems.setName(incoming.getName());
+        ucsbDiningCommonsMenuItems.setStation(incoming.getStation());
+
+        ucsbDiningCommonsMenuItemsRepository.save(ucsbDiningCommonsMenuItems);
+
+        return ucsbDiningCommonsMenuItems;
     }
 }
