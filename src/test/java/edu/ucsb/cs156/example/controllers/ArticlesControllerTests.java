@@ -116,32 +116,37 @@ public class ArticlesControllerTests  extends ControllerTestCase {
             verify(articlesRepository, times(1)).findById(eq(7L));
             Map<String, Object> json = responseToJson(response);
             assertEquals("EntityNotFoundException", json.get("type"));
-            assertEquals("Articles with id 7 not found", json.get("message"));
-    }
+            assertEquals(String.format("Articles with id %s not found", "7"), json.get("message"));
+        }
+
     @WithMockUser(roles = { "ADMIN", "USER" })
     @Test
     public void an_admin_user_can_post_a_new_article() throws Exception {
             // arrange
+            LocalDateTime ldt = LocalDateTime.parse("2024-11-03T00:00:00");
 
-            Restaurant restaurant1 = Restaurant.builder()
-                            .name("Chipotle")
-                            .description("Mexican")
+            Articles articles1 = Articles.builder()
+                            .title("NEWS")
+                            .url("foxnews.com")
+                            .explanation("foxnews")
+                            .email("fox@gmail.com")
+                            .dateAdded(ldt)
                             .build();
 
-            when(restaurantRepository.save(eq(restaurant1))).thenReturn(restaurant1);
+            when(articlesRepository.save(eq(articles1))).thenReturn(articles1);
 
             // act
             MvcResult response = mockMvc.perform(
-                            post("/api/restaurants/post?name=Chipotle&description=Mexican")
+                            post("/api/articles/post?")
                                             .with(csrf()))
                             .andExpect(status().isOk()).andReturn();
 
             // assert
-            verify(restaurantRepository, times(1)).save(restaurant1);
-            String expectedJson = mapper.writeValueAsString(restaurant1);
+            verify(articlesRepository, times(1)).save(articles1);
+            String expectedJson = mapper.writeValueAsString(articles1);
             String responseString = response.getResponse().getContentAsString();
             assertEquals(expectedJson, responseString);
     }
-
+    
     
 }

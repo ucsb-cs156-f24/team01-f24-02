@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class Articles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String title;
     private String url;
