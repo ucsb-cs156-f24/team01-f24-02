@@ -108,6 +108,8 @@ public class UCSBDatesControllerTests extends ControllerTestCase {
                 assertEquals(expectedJson, responseString);
         }
 
+        //GET individual
+
         @WithMockUser(roles = { "USER" })
         @Test
         public void test_that_logged_in_user_can_get_by_id_when_the_id_does_not_exist() throws Exception {
@@ -127,6 +129,8 @@ public class UCSBDatesControllerTests extends ControllerTestCase {
                 assertEquals("EntityNotFoundException", json.get("type"));
                 assertEquals("UCSBDate with id 7 not found", json.get("message"));
         }
+
+        //GET ALL
 
         @WithMockUser(roles = { "USER" })
         @Test
@@ -193,6 +197,8 @@ public class UCSBDatesControllerTests extends ControllerTestCase {
                 String responseString = response.getResponse().getContentAsString();
                 assertEquals(expectedJson, responseString);
         }
+
+        //DELETE
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test

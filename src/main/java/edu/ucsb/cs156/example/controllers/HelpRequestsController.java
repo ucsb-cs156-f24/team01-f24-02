@@ -67,23 +67,24 @@ public class HelpRequestsController extends ApiController {
             @Parameter(name="requesterEmail") @RequestParam String requesterEmail,
             @Parameter(name="teamId") @RequestParam String teamId,
             @Parameter(name="tableOrBreakoutRoom") @RequestParam String tableOrBreakoutRoom,
+            @Parameter(name="requestTime", description="date (in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601)") @RequestParam("requestTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime requestTime,
             @Parameter(name="explanation") @RequestParam String explanation,
-            @Parameter(name="solved") @RequestParam boolean solved,
-            @Parameter(name="requestTime", description="date (in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601)") @RequestParam("requestTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime requestTime)
+            @Parameter(name="solved") @RequestParam boolean solved
+            )
             throws JsonProcessingException {
 
         // For an explanation of @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
         // See: https://www.baeldung.com/spring-date-parameters
 
-        log.info("localDateTime={}", localDateTime);
+        log.info("requestTime={}", requestTime);
 
         HelpRequest helpRequest = new HelpRequest();
-        ucsbDate.setRequesterEmail(requesterEmail);
-        ucsbDate.setTeamId(teamId);
-        ucsbDate.setTableOrBreakoutRoom(tableOrBreakoutRoom);
-        ucsbDate.setRequestTime(requestTime);
-        ucsbDate.setExplanation(explanation);
-        ucsbDate.setSolved(solved);
+        helpRequest.setRequesterEmail(requesterEmail);
+        helpRequest.setTeamId(teamId);
+        helpRequest.setTableOrBreakoutRoom(tableOrBreakoutRoom);
+        helpRequest.setRequestTime(requestTime);
+        helpRequest.setExplanation(explanation);
+        helpRequest.setSolved(solved);
 
         HelpRequest savedhelpRequest = helpRequestRepository.save(helpRequest);
 
