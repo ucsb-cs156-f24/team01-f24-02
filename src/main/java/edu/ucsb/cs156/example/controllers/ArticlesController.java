@@ -51,7 +51,7 @@ public class ArticlesController extends ApiController {
      * @param id long id
      * @param title of the article
      * @param url article url
-     * @param explaination an explaination of article
+     * @param explanation an explanation of article
      * @param email email of the sender
      * @param date added date of article
      * @return the save article
@@ -62,7 +62,7 @@ public class ArticlesController extends ApiController {
     public Articles postArticle(
         @Parameter(name="title") @RequestParam String title,
         @Parameter(name="url") @RequestParam String url,
-        @Parameter(name="explaination") @RequestParam String explaination,
+        @Parameter(name="explanation") @RequestParam String explanation,
         @Parameter(name="email") @RequestParam String email,
         @Parameter(name="dateAdded", description="date (in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601)") @RequestParam("dateAdded") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateAdded)
             throws JsonProcessingException {
@@ -71,7 +71,7 @@ public class ArticlesController extends ApiController {
         Articles articles = Articles.builder()
             .title(title)
             .url(url)
-            .explanation(explaination)
+            .explanation(explanation)
             .email(email)
             .dateAdded(dateAdded)
             .build();
