@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 import lombok.Data;
 import java.time.LocalDateTime;
 
+/**
+ * This is a JPA entity that represents an article.
+ */
 
 @Builder
 @Data
