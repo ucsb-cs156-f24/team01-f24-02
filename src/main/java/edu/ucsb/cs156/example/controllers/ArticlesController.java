@@ -38,6 +38,11 @@ public class ArticlesController extends ApiController {
     @Autowired
     articlesRepository articlesRepository;
 
+    /**
+     * returns list of all articles
+     * 
+     * @return articles
+     */
     @Operation(summary= "List all Articles")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
@@ -47,7 +52,7 @@ public class ArticlesController extends ApiController {
     }
 
     /**
-     * This method creates a new diningcommons. Accessible only to users with the role "ROLE_ADMIN".
+     * This method creates a new article. Accessible only to users with the role "ROLE_ADMIN".
      * @param id long id
      * @param title of the article
      * @param url article url
@@ -84,7 +89,7 @@ public class ArticlesController extends ApiController {
      * Get a single article by id
      * 
      * @param id the id of the article
-     * @return an article
+     * @return article
      */
     @Operation(summary= "Get a single article")
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -102,7 +107,7 @@ public class ArticlesController extends ApiController {
      * update a single article, accessible by only admins
      * @param id
      * @param incoming
-     * @return
+     * @return articles 
      */
     @Operation(summary= "Update a single article")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -127,7 +132,7 @@ public class ArticlesController extends ApiController {
     }
 
     /**
-     * Delete an article
+     * Deletes an article bassed off of id
      * 
      * @param id the id of thearticle to delete
      * @return a message indicating the article was deleted
