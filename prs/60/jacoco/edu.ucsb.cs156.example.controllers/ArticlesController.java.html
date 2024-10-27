@@ -38,16 +38,21 @@ import java.time.LocalDateTime;
     @Autowired
     articlesRepository articlesRepository;
 
+    /**
+     * returns list of all articles
+     * 
+     * @return articles
+     */
     @Operation(summary= &quot;List all Articles&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
     @GetMapping(&quot;/all&quot;)
     public Iterable&lt;Articles&gt; allArticles() {
-<span class="fc" id="L45">        Iterable&lt;Articles&gt; articles = articlesRepository.findAll();</span>
-<span class="fc" id="L46">        return articles;</span>
+<span class="fc" id="L50">        Iterable&lt;Articles&gt; articles = articlesRepository.findAll();</span>
+<span class="fc" id="L51">        return articles;</span>
     }
 
     /**
-     * This method creates a new diningcommons. Accessible only to users with the role &quot;ROLE_ADMIN&quot;.
+     * This method creates a new article. Accessible only to users with the role &quot;ROLE_ADMIN&quot;.
      * @param id long id
      * @param title of the article
      * @param url article url
@@ -66,35 +71,35 @@ import java.time.LocalDateTime;
         @Parameter(name=&quot;email&quot;) @RequestParam String email,
         @Parameter(name=&quot;dateAdded&quot;, description=&quot;date (in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601)&quot;) @RequestParam(&quot;dateAdded&quot;) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateAdded)
             throws JsonProcessingException {
-<span class="fc" id="L69">        log.info(&quot;dateAdded={}&quot;, dateAdded);</span>
+<span class="fc" id="L74">        log.info(&quot;dateAdded={}&quot;, dateAdded);</span>
 
-<span class="fc" id="L71">        Articles articles = Articles.builder()</span>
-<span class="fc" id="L72">            .title(title)</span>
-<span class="fc" id="L73">            .url(url)</span>
-<span class="fc" id="L74">            .explanation(explanation)</span>
-<span class="fc" id="L75">            .email(email)</span>
-<span class="fc" id="L76">            .dateAdded(dateAdded)</span>
-<span class="fc" id="L77">            .build();</span>
+<span class="fc" id="L76">        Articles articles = Articles.builder()</span>
+<span class="fc" id="L77">            .title(title)</span>
+<span class="fc" id="L78">            .url(url)</span>
+<span class="fc" id="L79">            .explanation(explanation)</span>
+<span class="fc" id="L80">            .email(email)</span>
+<span class="fc" id="L81">            .dateAdded(dateAdded)</span>
+<span class="fc" id="L82">            .build();</span>
 
-<span class="fc" id="L79">        Articles savedArticles = articlesRepository.save(articles);</span>
+<span class="fc" id="L84">        Articles savedArticles = articlesRepository.save(articles);</span>
 
-<span class="fc" id="L81">        return savedArticles;</span>
+<span class="fc" id="L86">        return savedArticles;</span>
     }
     /**
      * Get a single article by id
      * 
      * @param id the id of the article
-     * @return an article
+     * @return article
      */
     @Operation(summary= &quot;Get a single article&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
     @GetMapping(&quot;&quot;)
     public Articles getById(
     @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
-<span class="fc" id="L94">            Articles article = articlesRepository.findById(id)</span>
-<span class="fc" id="L95">            .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, id));</span>
+<span class="fc" id="L99">            Articles article = articlesRepository.findById(id)</span>
+<span class="fc" id="L100">            .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, id));</span>
        
-<span class="fc" id="L97">            return article;</span>
+<span class="fc" id="L102">            return article;</span>
     
     }
     
@@ -102,7 +107,7 @@ import java.time.LocalDateTime;
      * update a single article, accessible by only admins
      * @param id
      * @param incoming
-     * @return
+     * @return articles 
      */
     @Operation(summary= &quot;Update a single article&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
@@ -111,23 +116,23 @@ import java.time.LocalDateTime;
             @Parameter(name=&quot;id&quot;) @RequestParam Long id,
             @RequestBody @Valid Articles incoming) {
 
-<span class="fc" id="L114">        Articles articles = articlesRepository.findById(id)</span>
-<span class="fc" id="L115">                .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, id));</span>
+<span class="fc" id="L119">        Articles articles = articlesRepository.findById(id)</span>
+<span class="fc" id="L120">                .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, id));</span>
 
-<span class="fc" id="L117">        articles.setTitle(incoming.getTitle());</span>
-<span class="fc" id="L118">        articles.setUrl (incoming.getUrl());</span>
-<span class="fc" id="L119">        articles.setExplanation(incoming.getExplanation());</span>
-<span class="fc" id="L120">        articles.setEmail(incoming.getEmail());</span>
-<span class="fc" id="L121">        articles.setDateAdded(incoming.getDateAdded());</span>
+<span class="fc" id="L122">        articles.setTitle(incoming.getTitle());</span>
+<span class="fc" id="L123">        articles.setUrl (incoming.getUrl());</span>
+<span class="fc" id="L124">        articles.setExplanation(incoming.getExplanation());</span>
+<span class="fc" id="L125">        articles.setEmail(incoming.getEmail());</span>
+<span class="fc" id="L126">        articles.setDateAdded(incoming.getDateAdded());</span>
         
 
-<span class="fc" id="L124">        articlesRepository.save(articles);</span>
+<span class="fc" id="L129">        articlesRepository.save(articles);</span>
 
-<span class="fc" id="L126">        return articles;</span>
+<span class="fc" id="L131">        return articles;</span>
     }
 
     /**
-     * Delete an article
+     * Deletes an article bassed off of id
      * 
      * @param id the id of thearticle to delete
      * @return a message indicating the article was deleted
@@ -137,11 +142,11 @@ import java.time.LocalDateTime;
     @DeleteMapping(&quot;&quot;)
     public Object deleteArticle(
             @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
-<span class="fc" id="L140">        Articles article = articlesRepository.findById(id)</span>
-<span class="fc" id="L141">                .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, id));</span>
+<span class="fc" id="L145">        Articles article = articlesRepository.findById(id)</span>
+<span class="fc" id="L146">                .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, id));</span>
 
-<span class="fc" id="L143">        articlesRepository.delete(article);</span>
-<span class="fc" id="L144">        return genericMessage(&quot;Article with id %s deleted&quot;.formatted(id));</span>
+<span class="fc" id="L148">        articlesRepository.delete(article);</span>
+<span class="fc" id="L149">        return genericMessage(&quot;Article with id %s deleted&quot;.formatted(id));</span>
     }
 
 }
