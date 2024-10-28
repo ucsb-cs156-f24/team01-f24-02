@@ -88,5 +88,40 @@ import java.time.LocalDateTime;
 
 <span class="fc" id="L89">        return savedMenuItemReview;</span>
     }
+
+    @Operation(summary= &quot;Get a single review&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+    @GetMapping(&quot;&quot;)
+    public MenuItemReview getById(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L97">        MenuItemReview menuItemReview = menuItemReviewRepository.findById(id)</span>
+<span class="fc" id="L98">                .orElseThrow(() -&gt; new EntityNotFoundException(MenuItemReview.class, id));</span>
+
+<span class="fc" id="L100">        return menuItemReview;</span>
+    }
+
+    @Operation(summary= &quot;Update a menu item review&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @PutMapping(&quot;&quot;)
+    public MenuItemReview updateMenuItemReview(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id,
+            @RequestBody @Valid MenuItemReview incoming) {
+
+<span class="fc" id="L110">        MenuItemReview menuItemReview = menuItemReviewRepository.findById(id)</span>
+<span class="fc" id="L111">                .orElseThrow(() -&gt; new EntityNotFoundException(MenuItemReview.class, id));</span>
+
+
+<span class="fc" id="L114">        menuItemReview.setItemId(incoming.getItemId());</span>
+<span class="fc" id="L115">        menuItemReview.setReviewerEmail(incoming.getReviewerEmail());</span>
+<span class="fc" id="L116">        menuItemReview.setStars(incoming.getStars());</span>
+<span class="fc" id="L117">        menuItemReview.setDateReviewed(incoming.getDateReviewed());</span>
+<span class="fc" id="L118">        menuItemReview.setComments(incoming.getComments());</span>
+
+
+<span class="fc" id="L121">        menuItemReviewRepository.save(menuItemReview);</span>
+
+<span class="fc" id="L123">        return menuItemReview;</span>
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
