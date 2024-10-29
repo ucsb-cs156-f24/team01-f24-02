@@ -123,5 +123,17 @@ import java.time.LocalDateTime;
 <span class="fc" id="L123">        return menuItemReview;</span>
     }
 
+    @Operation(summary= &quot;Delete a MenuItemReview&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @DeleteMapping(&quot;&quot;)
+    public Object deleteMenuItemReview(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) 
+            {
+<span class="fc" id="L132">                MenuItemReview menuItemReview = menuItemReviewRepository.findById(id).orElseThrow(() -&gt; new EntityNotFoundException(MenuItemReview.class, id));</span>
+
+<span class="fc" id="L134">        menuItemReviewRepository.delete(menuItemReview);</span>
+<span class="fc" id="L135">        return genericMessage(&quot;MenuItemReview with id %s deleted&quot;.formatted(id));</span>
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
