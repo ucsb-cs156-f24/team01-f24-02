@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f24/team01-f24-02
 owner: ucsb-cs156-f24
 repo_name: team01-f24-02
-pull_requests: [{"author":{"id":"U_kgDOBt27wQ","is_bot":false,"login":"vedp3705","name":""},"headRefName":"vedp3705-patch-1","number":62,"title":"Update README.md","url":"https://github.com/ucsb-cs156-f24/team01-f24-02/pull/62"},{"author":{"id":"MDQ6VXNlcjI5Njc5MDYz","is_bot":false,"login":"billybobjoe123","name":""},"headRefName":"billybobjoe123","number":60,"title":"Create database table for articles, Create ArticlesController added GET (index), POST (create) GET(show) PUT(edit) DELETE endpoints","url":"https://github.com/ucsb-cs156-f24/team01-f24-02/pull/60"}]
+pull_requests: [{"author":{"id":"U_kgDOBt27wQ","is_bot":false,"login":"vedp3705","name":""},"headRefName":"vedp3705-patch-1","number":62,"title":"Update README.md","url":"https://github.com/ucsb-cs156-f24/team01-f24-02/pull/62"}]
