@@ -11,19 +11,23 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * This is a JPA entity that represents a help request.
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity(name = "menuitemreview")
-public class MenuItemReview {
+@Entity(name = "helprequests")
+public class HelpRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    private long itemId;
-    private String reviewerEmail;
-    private int stars;
-    private LocalDateTime dateReviewed;
-    private String comments;
+    private String requesterEmail;
+    private String teamId;
+    private String tableOrBreakoutRoom;
+    private LocalDateTime requestTime;
+    private String explanation;
+    private boolean solved;
 }
