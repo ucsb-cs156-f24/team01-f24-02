@@ -8,7 +8,7 @@ team01,edu.ucsb.cs156.example.controllers,RestaurantsController,0,104,0,0,0,21,0
 team01,edu.ucsb.cs156.example.controllers,UCSBDiningCommonsMenuItemsController,0,115,0,0,0,24,0,10,0,10
 team01,edu.ucsb.cs156.example.controllers,MenuItemReviewController,0,103,0,0,0,25,0,8,0,8
 team01,edu.ucsb.cs156.example.controllers,UCSBDiningCommonsController,0,141,0,0,0,31,0,10,0,10
-team01,edu.ucsb.cs156.example.controllers,UCSBOrganizationsController,0,54,0,0,0,14,0,6,0,6
+team01,edu.ucsb.cs156.example.controllers,UCSBOrganizationsController,0,118,0,0,0,25,0,10,0,10
 team01,edu.ucsb.cs156.example.controllers,RecommendationRequestController,0,129,0,0,0,31,0,10,0,10
 team01,edu.ucsb.cs156.example.controllers,HelpRequestsController,0,140,0,0,0,31,0,10,0,10
 team01,edu.ucsb.cs156.example.controllers,SystemInfoController,0,7,0,0,0,2,0,2,0,2
